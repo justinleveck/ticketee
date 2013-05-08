@@ -21,3 +21,4 @@ end
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.0.1'
+gem 'json', '~> 1.7.7'
