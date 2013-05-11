@@ -1,57 +1,66 @@
 class ProjectsController < ApplicationController
-    def index
-      @projects = Project.all
+  before_action :set_project, only: [:show,
+                                     :edit,
+                                     :update,
+                                     :destroy]  
+  def index
+    @projects = Project.all
+  end
+
+  def show
+  end
+
+  def edit
+  end
+
+  def update
+    if @project.update(project_params)
+      flash[:notice] = "Project has been updated."
+      redirect_to @project
+    else
+      flash[:alert] = "Project has not been updated."
+      render action: "edit"
     end
+  end
 
-    def show
-      @project = Project.find(params[:id])
-    end
+  def destroy
+    @project.destroy
 
-    def edit
-      @project = Project.find(params[:id])
-    end
+    flash[:notice] = "Project has been destroyed."
 
-    def update
-      @project = Project.find(params[:id])
+    redirect_to projects_path
+  end
 
-      if @project.update(project_params)
-        flash[:notice] = "Project has been updated."
+  def new
+    @project = Project.new
+  end
+
+  def create
+    @project = Project.new(project_params)
+
+    if @project.save
+        flash[:notice] = "Project has been created."
         redirect_to @project
-      else
-        flash[:alert] = "Project has not been updated."
-        render action: "edit"
-      end
+    else
+      flash[:alert] = "Project has not been created."
+      
+      render :action => "new"
     end
+  end
 
-    def destroy
-      @project = Project.find(params[:id])
-      @project.destroy
+  private
 
-      flash[:notice] = "Project has been destroyed."
+  def project_params
+    params.require(:project).permit(:name, :description)
+  end
 
-      redirect_to projects_path
-    end
+  private
 
-    def new
-      @project = Project.new
-    end
-
-    def create
-      @project = Project.new(project_params)
-
-      if @project.save
-          flash[:notice] = "Project has been created."
-          redirect_to @project
-      else
-        flash[:alert] = "Project has not been created."
-        
-        render :action => "new"
-      end
-    end
-
-    private
-
-    def project_params
-      params.require(:project).permit(:name, :description)
-    end
+  def set_project
+    @project = Project.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+    flash[:alert] = "The project you were looking" +
+    " for could not be found."
+    redirect_to projects_path
+  end    
 end
