@@ -20,6 +20,7 @@ group :test do
   gem 'factory_girl', '4.2.0'
 end
 
+gem 'devise', '>= 2.1.0.rc'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.0.1'
