@@ -5,6 +5,9 @@ class TicketsController < ApplicationController
   def show
   end
 
+  def edit
+  end
+
   def update
     if @ticket.update(ticket_params)
       flash[:notice] = "Ticket has been updated."
@@ -17,7 +20,11 @@ class TicketsController < ApplicationController
     end
   end
 
-  def edit
+  def destroy
+    @ticket.destroy
+    flash[:notice] = "Ticket has been deleted."
+
+    redirect_to @project
   end
 
   def new
