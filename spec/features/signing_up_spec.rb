@@ -10,6 +10,6 @@ feature 'Signing up' do
     fill_in "user[password_confirmation]", :with => "password"
     click_button "Sign up"
 
-    expect(page).to have_content("You have signed up successfully")
+    expect(page).to have_content("You have signed up successfully.")
   end
 end
