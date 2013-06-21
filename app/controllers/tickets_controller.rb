@@ -1,8 +1,9 @@
 class TicketsController < ApplicationController
   before_action :set_project
   before_action :set_ticket, only: [:show, :edit, :update, :destroy]
-  
+
   def show
+
   end
 
   def edit
@@ -11,11 +12,11 @@ class TicketsController < ApplicationController
   def update
     if @ticket.update(ticket_params)
       flash[:notice] = "Ticket has been updated."
-      
+
       redirect_to [@project, @ticket]
     else
       flash[:alert] = "Ticket has not been updated."
-      
+
       render action: "edit"
     end
   end
@@ -38,7 +39,7 @@ class TicketsController < ApplicationController
       flash[:notice] = "Ticket has been created."
       redirect_to [@project, @ticket]
     else
-      flash[:alert] = "Ticket has not been created."     
+      flash[:alert] = "Ticket has not been created."
       render :action => "new"
     end
   end
@@ -51,8 +52,8 @@ class TicketsController < ApplicationController
     def set_ticket
       @ticket = @project.tickets.find(params[:id])
     end
-    
+
     def ticket_params
       params.require(:ticket).permit(:title, :description)
-    end    
+    end
 end

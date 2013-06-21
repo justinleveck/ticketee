@@ -22,6 +22,7 @@
 
 <nav>
 <%= link_to "Sign up", new_user_path %>
+<%= link_to "Edit Profile", edit_user_path(session[:user_id]) %>
 </nav>
 
 <%= yield %>
