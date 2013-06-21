@@ -30,12 +30,9 @@ class UsersController < ApplicationController
   def update
     if @user.update(user_params)
       flash[:notice] = "Profile has been updated."
-
-      redirect_to [@user]
+      redirect_to user_path(@user)
     else
-      flash[:alert] = "Profile has not been updated."
-
-      render action: "edit"
+      render :new
     end
   end
 

@@ -16,9 +16,12 @@ feature "Editing Users" do
 		user = FactoryGirl.create(:user)
 
 		visit user_path(user)
+		save_page "/vagrant/ticketee/tmp/capybara/user_profile_page.html"
 		click_link "Edit Profile"
 
-		fill_in "user[name]", with: "new_username"
+		save_page "/vagrant/ticketee/tmp/capybara/edit_profile_page.html"
+
+		fill_in "user_name", with: "new_username"
     fill_in "user[password]", with: "new_password"
     fill_in "Password confirmation", with: "new_password"
     click_button "Update Profile"

@@ -1,2 +1,5 @@
 <h1><%= @user.name %></h1>
-<%= @user.email %>
+<h2>Email</h2>
+<p><%= @user.email %></p>
+
+<%= link_to "Edit Profile", edit_user_path(@user) %>
